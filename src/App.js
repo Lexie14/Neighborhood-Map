@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMap from './GoogleMap.js';
+import List from './List.js';
 import './App.css';
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
 
     return (
       <div className="App">
+      <List locations={this.state.locations}/>
         <GoogleMap locations={this.state.locations} />
       </div>
     );
