@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Map, GoogleApiWrapper } from 'google-maps-react';
+import {Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import './App.css';
 
 class GoogleMap extends Component {
@@ -20,7 +20,18 @@ const styles = {
           lat: 52.2413928,
           lng: 20.9876703
         }}
-      />
+        >
+
+        {this.props.locations.map(location => 
+        <Marker 
+        key={location.key}
+        title={location.title}
+        position={location.location} 
+        />
+        )}
+      </Map>
+
+      
     );
   }
 }
