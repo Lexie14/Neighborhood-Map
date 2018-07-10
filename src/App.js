@@ -17,9 +17,9 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
-      <List locations={this.state.locations}/>
-        <GoogleMap locations={this.state.locations} />
+      <div className="app">
+       <List locations={this.state.locations}/>
+       <GoogleMap locations={this.state.locations} />
       </div>
     );
   }

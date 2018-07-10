@@ -7,6 +7,11 @@ class List extends Component {
 
     return (
       <aside className="list">
+       <h2 className="title">Popular Places</h2>
+       <div className="filter">
+       <input className="filterInput" placeholder="Filter locations"/>
+       <button className="filterBtn">Filter</button>
+       </div>
         <ul>
         {locations.map(location =>
           <li key={location.key}>{location.title}</li>

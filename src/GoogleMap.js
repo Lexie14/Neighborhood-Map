@@ -6,20 +6,15 @@ class GoogleMap extends Component {
 
   render() {
 
-const styles = {
-      width: '100%',
-      height: '100%'
-    };
-
     return (
       <Map
         google={this.props.google}
         zoom={13.5}
-        style={styles}
         initialCenter={{
           lat: 52.2413928,
           lng: 20.9876703
         }}
+        className={'map'}
         >
 
         {this.props.locations.map(location => 
