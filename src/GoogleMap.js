@@ -21,7 +21,9 @@ class GoogleMap extends Component {
         <Marker 
         key={location.key}
         title={location.title}
-        position={location.location} 
+        position={location.location}
+        onClick={() => this.props.openInfoWindow()}
+        info={this.props.info} 
         />
         )}
       </Map>
