@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-import {Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import {Map, Marker, GoogleApiWrapper, InfoWindow} from 'google-maps-react';
 import './App.css';
 
 class GoogleMap extends Component {
+  constructor(props) {
+    super(props);
+    this.openInfo = this.openInfo.bind(this);
+  }
+
+openInfo = () => {
+  this.props.openInfoWindow();
+}
 
   render() {
 
@@ -18,13 +26,23 @@ class GoogleMap extends Component {
         >
 
         {this.props.locations.map(location => 
+        
         <Marker 
         key={location.key}
         title={location.title}
         position={location.location}
-        onClick={() => this.props.openInfoWindow()}
-        info={this.props.info} 
-        />
+        onClick={() => this.openInfo()}
+        >
+
+        {this.props.isOpen && (
+          <InfoWindow 
+          key={location.key}>
+                <div className={'info'}>
+                  <h1>Hellosfsdfdaddd</h1>
+                </div>
+         </InfoWindow> 
+        )}
+        </Marker>
         )}
       </Map>
 
