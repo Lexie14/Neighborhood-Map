@@ -2,15 +2,45 @@ import React, { Component } from 'react';
 import {Map, Marker, GoogleApiWrapper, InfoWindow} from 'google-maps-react';
 import './App.css';
 
+var foursquare = require('react-foursquare')({
+  clientID: 'CNHL0RH0I5DUM5B42LTDNVTCE3IPJCOK5G3ZY5C3H2UYEW5D',
+  clientSecret: '01FTFRQ0BKGCCSJ4ROA3CVHNCS2EHD1XH4J00NPRGKECXHPQ'  
+});
+
+var params = {
+  "ll": "37.7749,-122.4194",
+  "query": 'Blue Bottle'
+};
+
 class GoogleMap extends Component {
   constructor(props) {
     super(props);
-    this.openInfo = this.openInfo.bind(this);
+    // this.openInfo = this.openInfo.bind(this);
+    this.state = {
+    activeMarker: {},
+    // selectedPlace: {},
+    isOpen: false,
+    info: []
   }
-
-openInfo = () => {
-  this.props.openInfoWindow();
 }
+
+    componentDidMount() {    
+    foursquare.venues.getVenues(params)
+      .then(res=> {
+        this.setState({ info: res.response.venues });
+      });
+  }
+// openInfo = () => {
+//   this.props.openInfoWindow();
+// }
+
+  openInfo = (props, marker, e) => {
+    this.setState({
+      // selectedPlace: props,
+      activeMarker: marker,
+      isOpen: true
+    })
+  }
 
   render() {
 
@@ -31,19 +61,19 @@ openInfo = () => {
         key={location.key}
         title={location.title}
         position={location.location}
-        onClick={() => this.openInfo()}
-        >
+        onClick={this.openInfo}
+        />
+        )}
+    
 
-        {this.props.isOpen && (
           <InfoWindow 
-          key={location.key}>
-                <div className={'info'}>
-                  <h1>Hellosfsdfdaddd</h1>
-                </div>
-         </InfoWindow> 
-        )}
-        </Marker>
-        )}
+          marker={this.state.activeMarker} 
+          visible={this.state.isOpen}>
+          <div>
+        <div>Items:</div>
+        { this.state.info.map(item=> { return <div key={item.id}>{item.name}</div>}) }
+    </div>
+                         </InfoWindow>
       </Map>
 
       

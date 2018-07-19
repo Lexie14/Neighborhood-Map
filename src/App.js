@@ -8,7 +8,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.filterLocations = this.filterLocations.bind(this);
-    this.openInfoWindow = this.openInfoWindow.bind(this);
   this.state = {
     locations: [
         {key: 'zlote-terasy', title: 'Zlote Terasy', location: {lat: 52.2299756, lng: 21.0025774}},
@@ -19,8 +18,6 @@ class App extends Component {
         ],
         query: '',
         filteredLocations: [],
-        selectedLocation: null,
-        isOpen: false
   }
 }
 
@@ -28,13 +25,6 @@ filterLocations = (query) => {
   this.setState({query: query});
   }
 
-openInfoWindow = () => {
-  this.setState({
-    isOpen: true
-  })
-
-}
- 
   render() {
     const {query, locations} = this.state;
      let filteredLocations
@@ -55,8 +45,6 @@ openInfoWindow = () => {
         />
        <GoogleMap 
        locations={filteredLocations}
-       openInfoWindow={this.openInfoWindow}
-       isOpen={this.state.isOpen}
        />
       </div>
     );
