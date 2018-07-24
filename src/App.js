@@ -16,9 +16,9 @@ class App extends Component {
         location: {lat: 52.2299756, lng: 21.0025774}},
         
         {id: '4b6c5160f964a52039302ce3',
-        key: 'wola-park', 
-        title: 'Wola Park', 
-        location: {lat: 52.242051, lng: 20.9311577}},
+        key: 'aushan', 
+        title: 'Aushan', 
+        location: {lat: 52.242121, lng: 20.930710}},
         
         {id: '4c713f17df6b8cfa556fba4d',
         key: 'park-moczydlo', 
@@ -31,9 +31,9 @@ class App extends Component {
         location: {lat: 52.232324, lng: 20.981154}},
         
         {id: '4b1a33dcf964a5201be823e3',
-        key: 'arkadia', 
-        title: 'Arkadia', 
-        location: {lat: 52.2574323, lng: 20.9848839}}
+        key: 'cinema-city', 
+        title: 'Cinema City', 
+        location: {lat: 52.256637, lng: 20.984122}}
         ],
         query: '',
         filteredLocations: [],

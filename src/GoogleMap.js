@@ -6,17 +6,18 @@ import './App.css';
 class GoogleMap extends Component {
   constructor(props) {
     super(props);
-    // this.openInfo = this.openInfo.bind(this);
+    this.openInfo = this.openInfo.bind(this);
     this.state = {
     activeMarker: {},
     // selectedPlace: {},
     isOpen: false,
-    info: ''
+    info: []
   };
 }
 
-
-
+compomentDidMount() {
+  this.openInfo();
+}
 
 
   openInfo = (props, marker, e) => {
@@ -32,8 +33,11 @@ class GoogleMap extends Component {
   .then(response => {
     return response.json();
   }).then(data => {
- var name = data.response.venues[0].name;
-  this.setState({info: name});
+  this.setState({
+    info: [data.response.venues[0].location.address,
+    data.response.venues[0].location.city,
+    data.response.venues[0].location.postalCode, 
+    data.response.venues[0].name]});
   });
   }
 
@@ -42,7 +46,7 @@ class GoogleMap extends Component {
     return (
       <Map
         google={this.props.google}
-        zoom={13.5}
+        zoom={12}
         initialCenter={{
           lat: 52.2413928,
           lng: 20.9876703
@@ -64,9 +68,15 @@ class GoogleMap extends Component {
           <InfoWindow 
           marker={this.state.activeMarker} 
           visible={this.state.isOpen}
+          info={this.state.info}
           >
-          {this.state.info}
-
+          <div>
+          <p>Name: {this.state.info[3]}</p>
+          <p>Address: {this.state.info[0]}</p>
+          <p>Postal code: {this.state.info[2]}</p>
+          <p>City: {this.state.info[1]}</p>
+          <p>Data provided by the Foursquare API</p>
+          </div>
           </InfoWindow>
       </Map>
 
