@@ -6,19 +6,7 @@ import './App.css';
 class GoogleMap extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {}
-  };
-}
-
-onMarkerClick = (props, marker, e) =>
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    }); 
+  }
 
   render() {
 
@@ -34,17 +22,23 @@ onMarkerClick = (props, marker, e) =>
         onClick={this.onMapClicked}
         >
         {this.props.locations.map(location =>
-        <Marker onClick={this.onMarkerClick}
+        <Marker onClick={this.props.onMarkerClick}
         key={location.key}
         title={location.title}
         position={location.location}/>
                 )}    
 
          <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}>
+          marker={this.props.activeMarker}
+          visible={this.props.showingInfoWindow}>
             <div>
-              <h1>{this.state.selectedPlace.title}</h1>
+            <p>Hello</p>
+          <p>Name: {this.props.info[4]}</p>
+          <p>Type: {this.props.info[0]}</p>
+          <p>Address: {!this.props.info[1] ? 'N/A' : this.props.info[1]}</p>
+          <p>Postal code: {!this.props.info[3] ? 'N/A' : this.props.info[3]}</p>
+          <p>City: {!this.props.info[2] ?'N/A' : this.props.info[2]}</p>
+          <p>Data provided by the Foursquare API</p>
             </div>
         </InfoWindow>
       </Map>
