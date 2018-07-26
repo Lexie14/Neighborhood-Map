@@ -6,40 +6,19 @@ import './App.css';
 class GoogleMap extends Component {
   constructor(props) {
     super(props);
-    this.openInfo = this.openInfo.bind(this);
     this.state = {
+    showingInfoWindow: false,
     activeMarker: {},
-    // selectedPlace: {},
-    isOpen: false,
-    info: []
+    selectedPlace: {}
   };
 }
 
-compomentDidMount() {
-  this.openInfo();
-}
-
-
-  openInfo = (props, marker, e) => {
+onMarkerClick = (props, marker, e) =>
     this.setState({
-      // selectedPlace: props,
+      selectedPlace: props,
       activeMarker: marker,
-      isOpen: true
-    })
-    var lat = marker.position.lat();
-      var lng = marker.position.lng();
-
-  fetch('https://api.foursquare.com/v2/venues/search?ll=' + lat +','+ lng + '&client_id=CNHL0RH0I5DUM5B42LTDNVTCE3IPJCOK5G3ZY5C3H2UYEW5D&client_secret=01FTFRQ0BKGCCSJ4ROA3CVHNCS2EHD1XH4J00NPRGKECXHPQ&v=20180723&m=foursquare')
-  .then(response => {
-    return response.json();
-  }).then(data => {
-  this.setState({
-    info: [data.response.venues[0].location.address,
-    data.response.venues[0].location.city,
-    data.response.venues[0].location.postalCode, 
-    data.response.venues[0].name]});
-  });
-  }
+      showingInfoWindow: true
+    }); 
 
   render() {
 
@@ -52,36 +31,24 @@ compomentDidMount() {
           lng: 20.9876703
         }}
         className={'map'}
+        onClick={this.onMapClicked}
         >
-
-        {this.props.locations.map(location => 
-        
-        <Marker 
+        {this.props.locations.map(location =>
+        <Marker onClick={this.onMarkerClick}
         key={location.key}
         title={location.title}
-        position={location.location}
-        onClick={this.openInfo}
-        />
-        )}
-    
+        position={location.location}/>
+                )}    
 
-          <InfoWindow 
-          marker={this.state.activeMarker} 
-          visible={this.state.isOpen}
-          info={this.state.info}
-          >
-          <div>
-          <p>Name: {this.state.info[3]}</p>
-          <p>Address: {this.state.info[0]}</p>
-          <p>Postal code: {this.state.info[2]}</p>
-          <p>City: {this.state.info[1]}</p>
-          <p>Data provided by the Foursquare API</p>
-          </div>
-          </InfoWindow>
+         <InfoWindow
+          marker={this.state.activeMarker}
+          visible={this.state.showingInfoWindow}>
+            <div>
+              <h1>{this.state.selectedPlace.title}</h1>
+            </div>
+        </InfoWindow>
       </Map>
-
-      
-    );
+    )
   }
 }
 
