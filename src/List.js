@@ -23,7 +23,9 @@ class List extends Component {
        </div>
         <ul>
         {this.props.filteredLocations.map((location) =>
-          <li key={location.key}>{location.title}</li>
+          <li key={location.key}
+          onClick={()=>(this.props.onListViewItemClick(location))}
+          >{location.name}</li>
           )}
         </ul>
       </aside>

@@ -4,9 +4,6 @@ import './App.css';
 
 
 class GoogleMap extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
 
@@ -18,26 +15,30 @@ class GoogleMap extends Component {
           lat: 52.2413928,
           lng: 20.9876703
         }}
-        className={'map'}
-        onClick={this.onMapClicked}
+        onClick={this.props.onMapClick}
         >
         {this.props.locations.map(location =>
         <Marker onClick={this.props.onMarkerClick}
         key={location.key}
-        title={location.title}
-        position={location.location}/>
-                )}    
+        id={location.id}
+        title={location.key}
+        position={location.location}
+        name={location.name}
+        type = {location.type}
+        address = {location.address}
+        postalCode = {location.postalCode}
+        city = {location.city}/>
+        )}
 
          <InfoWindow
-          marker={this.props.activeMarker}
+          position={{lat: parseFloat(this.props.infoPosition.lat), lng: parseFloat(this.props.infoPosition.lng)}}
           visible={this.props.showingInfoWindow}>
             <div>
-            <p>Hello</p>
-          <p>Name: {this.props.info[4]}</p>
-          <p>Type: {this.props.info[0]}</p>
-          <p>Address: {!this.props.info[1] ? 'N/A' : this.props.info[1]}</p>
-          <p>Postal code: {!this.props.info[3] ? 'N/A' : this.props.info[3]}</p>
-          <p>City: {!this.props.info[2] ?'N/A' : this.props.info[2]}</p>
+          <p>Name: {this.props.selectedPlace.name}</p>
+          <p>Type: {!this.props.selectedPlace.type ? 'N/A' : this.props.selectedPlace.type}</p>
+          <p>Address: {!this.props.selectedPlace.address ? 'N/A' : this.props.selectedPlace.address}</p>
+          <p>Postal code: {!this.props.selectedPlace.postalCode ? 'N/A' : this.props.selectedPlace.postalCode}</p>
+          <p>City: {!this.props.selectedPlace.city ? 'N/A' : this.props.selectedPlace.city}</p>
           <p>Data provided by the Foursquare API</p>
             </div>
         </InfoWindow>
