@@ -37,17 +37,17 @@ class App extends Component {
         city: '', 
         location: {lat: 52.2409607, lng: 20.9532269}},
         
-        {id: '4d49440ca67eba7aff1170d6',
-        key: 'warsaw-uprising-museum', 
+        {id: '5107b917e4b09f028210823c',
+        key: 'hala-koszyki', 
         name: '',
         type: '',
         address: '',
         postalCode: '',
         city: '', 
-        location: {lat: 52.232324, lng: 20.981154}},
+        location: {lat: 52.222437, lng: 21.010999}},
         
         {id: '4b1a33dcf964a5201be823e3',
-        key: 'cinema-city', 
+        key: 'arkadia', 
         name: '',
         type: '',
         address: '',
@@ -58,26 +58,28 @@ class App extends Component {
         query: '',
         filteredLocations: [],
         showingInfoWindow: false,
-    activeMarker: {},
     selectedPlace: {},
-    info: [],
     infoPosition: {}
   };
 }
 
 componentDidMount() {
-  this.state.locations.map((location) => {
-   return fetch(`https://api.foursquare.com/v2/venues/search?ll=${location.location.lat},${location.location.lng}&client_id=CNHL0RH0I5DUM5B42LTDNVTCE3IPJCOK5G3ZY5C3H2UYEW5D&client_secret=01FTFRQ0BKGCCSJ4ROA3CVHNCS2EHD1XH4J00NPRGKECXHPQ&v=20180723&m=foursquare`)
-  .then(response => {
-    return response.json();
-  }).then(data => {
+  const newData = this.state.locations
+  newData.map((location) => {
+   return(
+    fetch(`https://api.foursquare.com/v2/venues/search?ll=${location.location.lat},${location.location.lng}&client_id=CNHL0RH0I5DUM5B42LTDNVTCE3IPJCOK5G3ZY5C3H2UYEW5D&client_secret=01FTFRQ0BKGCCSJ4ROA3CVHNCS2EHD1XH4J00NPRGKECXHPQ&v=20180723&m=foursquare`)
+    .then(response => response.json())
+    .then((data) => {
     location.name = data.response.venues[0].name
     location.type = data.response.venues[0].categories[0].name
     location.address = data.response.venues[0].location.address
     location.postalCode = data.response.venues[0].location.postalCode
     location.city = data.response.venues[0].location.city
-  }).catch(error => console.error())
-  }) 
+    this.setState({newData})
+  })
+  )
+})
+  console.log(newData)
 }
 
 onMarkerClick = (props, marker, e) => {
@@ -105,16 +107,21 @@ onMapClick = ()=> {
     })
     }
 
-filterLocations = (query) => {
-  this.setState({query: query});
+  filterLocations = (query, newData) => {
+  this.setState({
+    query: query,
+    infoPosition: {},
+    showingInfoWindow: false,
+  });
+  console.log(query, this.state.locations, this.state.newData)
   }
 
   render() {
+    let filteredLocations
     const {query, locations} = this.state;
-     let filteredLocations
-        if (query) {
+      if (query) {
       const match = new RegExp(escapeRegExp(query),'i');
-     filteredLocations = locations.filter((location)=> match.test(location.title))
+     filteredLocations = locations.filter((location)=> match.test(location.key))
   } else {
     filteredLocations = locations
     }
