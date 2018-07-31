@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Map, Marker, GoogleApiWrapper, InfoWindow} from 'google-maps-react';
 import './App.css';
+import Button from './Button.js';
 
 
 class GoogleMap extends Component {
@@ -8,6 +9,8 @@ class GoogleMap extends Component {
   render() {
 
     return (
+      <div className="main">
+      <Button toggleList={this.props.toggleList} />
       <Map
         google={this.props.google}
         zoom={12}
@@ -16,6 +19,7 @@ class GoogleMap extends Component {
           lng: 20.9876703
         }}
         onClick={this.props.onMapClick}
+        className="map"
         >
         {this.props.locations.map(location =>
         <Marker onClick={this.props.onMarkerClick}
@@ -43,6 +47,7 @@ class GoogleMap extends Component {
             </div>
         </InfoWindow>
       </Map>
+      </div>
     )
   }
 }

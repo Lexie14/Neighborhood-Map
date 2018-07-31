@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMap from './GoogleMap.js';
 import List from './List.js';
+
 import './App.css';
 import escapeRegExp from 'escape-string-regexp';
 
@@ -47,7 +48,7 @@ class App extends Component {
         location: {lat: 52.222437, lng: 21.010999}},
         
         {id: '4b1a33dcf964a5201be823e3',
-        key: 'arkadia', 
+        key: 'cinema-city', 
         name: '',
         type: '',
         address: '',
@@ -59,7 +60,8 @@ class App extends Component {
         filteredLocations: [],
         showingInfoWindow: false,
     selectedPlace: {},
-    infoPosition: {}
+    infoPosition: {},
+    listVisible: true
   };
 }
 
@@ -79,7 +81,6 @@ componentDidMount() {
   })
   )
 })
-  console.log(newData)
 }
 
 onMarkerClick = (props, marker, e) => {
@@ -113,29 +114,40 @@ onMapClick = ()=> {
     infoPosition: {},
     showingInfoWindow: false,
   });
-  console.log(query, this.state.locations, this.state.newData)
   }
+
+  toggleList = () => {
+    if (this.state.listVisible) {
+      this.setState({ listVisible: false });
+    } else {
+      this.setState({ listVisible: true });
+    }
+  };
 
   render() {
     let filteredLocations
     const {query, locations} = this.state;
       if (query) {
       const match = new RegExp(escapeRegExp(query),'i');
-     filteredLocations = locations.filter((location)=> match.test(location.key))
+     filteredLocations = locations.filter((location)=> match.test(location.name))
   } else {
     filteredLocations = locations
     }
 
    return (
       <div className="app">
+      
+
        <List 
         locations={this.state.locations}
         filteredLocations={filteredLocations}
         query={this.state.query}
         filterLocations={this.filterLocations}
         onListViewItemClick={this.onListViewItemClick}
+        listVisible={this.state.listVisible}
         />
        <GoogleMap
+       toggleList={this.toggleList}
        locations={filteredLocations}
        showingInfoWindow={this.state.showingInfoWindow}
        infoPosition={this.state.infoPosition}
@@ -144,6 +156,7 @@ onMapClick = ()=> {
        info={this.state.info}
        onMapClick={this.onMapClick}
        />
+
       </div>
     );
   }

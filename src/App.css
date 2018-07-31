@@ -14,16 +14,37 @@ html {
 }
 
 .filter {
-  display: flex;
 margin: 0 3px;
 } 
 
-.filterBtn {
+.main {
+width: 100%;
+}
+
+.navigation {
+  position: absolute;
+  background-color: #212121;
+/*  border: solid black;
+*/  text-align: center;
   width: 100%;
-  background-color: #5385BE; 
+  z-index: 1;
+  color: #ccc;
+  display: flex;
+  margin: 0;
+}
+
+.button {
+  background-image: url('./menu.png');
+ /* width: 100%;*/
+  background-color: transparent; 
   color: white;
   padding: 3px;
 border: none;
+width: 24px;
+height: 24px;
+margin: 5px;
+cursor: pointer;
+outline: none;
 }
 
 ul {
@@ -44,8 +65,12 @@ li {
 }
 
 .map {
+height: 100vh;
+margin-top: 34px;
+/*border: solid black;
+*/
+margin-bottom: 0;
 width: 100%;
-height: 100%;
 }
 
 .info {

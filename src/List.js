@@ -11,7 +11,11 @@ class List extends Component {
   } 
 
   render() {
+    const listVisible=this.props.listVisible
+    
     return (
+      <div className="list">
+      {listVisible && (
       <aside className="list">
        <h2 className="title">Popular Places</h2>
        <div className="filter">
@@ -19,7 +23,6 @@ class List extends Component {
        value={this.props.query}
        onChange={(event) => this.updateQuery(event.target.value)} 
        className="filterInput" placeholder="Filter locations"/>
-       <button className="filterBtn">Filter</button>
        </div>
         <ul>
         {this.props.filteredLocations.map((location) =>
@@ -29,6 +32,10 @@ class List extends Component {
           )}
         </ul>
       </aside>
+      )}
+      </div>
+
+
     );
   }
 }
