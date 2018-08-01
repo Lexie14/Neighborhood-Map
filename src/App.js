@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMap from './GoogleMap.js';
 import List from './List.js';
-
+import Button from './Button.js';
 import './App.css';
 import escapeRegExp from 'escape-string-regexp';
 
@@ -134,29 +134,47 @@ onMapClick = ()=> {
     filteredLocations = locations
     }
 
+const listVisible=this.state.listVisible
+
    return (
       <div className="app">
-      
+       <header className="navigation">
+        <Button toggleList={this.toggleList} />
+        <div className="title">Popular places in Warsaw</div>
+       </header>
 
-       <List 
-        locations={this.state.locations}
-        filteredLocations={filteredLocations}
-        query={this.state.query}
-        filterLocations={this.filterLocations}
-        onListViewItemClick={this.onListViewItemClick}
-        listVisible={this.state.listVisible}
-        />
-       <GoogleMap
-       toggleList={this.toggleList}
-       locations={filteredLocations}
-       showingInfoWindow={this.state.showingInfoWindow}
-       infoPosition={this.state.infoPosition}
-       selectedPlace={this.state.selectedPlace}
-       onMarkerClick={this.onMarkerClick}
-       info={this.state.info}
-       onMapClick={this.onMapClick}
-       />
+       <main className="main">
 
+        {listVisible && (
+        <aside className="list">
+           <List 
+            locations={this.state.locations}
+            filteredLocations={filteredLocations}
+            query={this.state.query}
+            filterLocations={this.filterLocations}
+            onListViewItemClick={this.onListViewItemClick}
+            listVisible={this.state.listVisible}
+            />
+        </aside>
+        )}
+
+        <section className="map" role="application">
+          <GoogleMap
+          toggleList={this.toggleList}
+          locations={filteredLocations}
+          showingInfoWindow={this.state.showingInfoWindow}
+          infoPosition={this.state.infoPosition}
+          selectedPlace={this.state.selectedPlace}
+          onMarkerClick={this.onMarkerClick}
+          info={this.state.info}
+          onMapClick={this.onMapClick}
+           />
+        </section>
+       </main>
+       
+       <footer className="footer">
+       <p className="sources">The app is built using data provided by the Google Api, Foursquare API and Icons8</p>
+       </footer>
       </div>
     );
   }

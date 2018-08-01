@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Map, Marker, GoogleApiWrapper, InfoWindow} from 'google-maps-react';
 import './App.css';
-import Button from './Button.js';
+
 
 
 class GoogleMap extends Component {
@@ -9,8 +9,6 @@ class GoogleMap extends Component {
   render() {
 
     return (
-      <div className="main">
-      <Button toggleList={this.props.toggleList} />
       <Map
         google={this.props.google}
         zoom={12}
@@ -37,17 +35,18 @@ class GoogleMap extends Component {
          <InfoWindow
           position={{lat: parseFloat(this.props.infoPosition.lat), lng: parseFloat(this.props.infoPosition.lng)}}
           visible={this.props.showingInfoWindow}>
-            <div>
-          <p>Name: {this.props.selectedPlace.name}</p>
-          <p>Type: {!this.props.selectedPlace.type ? 'N/A' : this.props.selectedPlace.type}</p>
-          <p>Address: {!this.props.selectedPlace.address ? 'N/A' : this.props.selectedPlace.address}</p>
-          <p>Postal code: {!this.props.selectedPlace.postalCode ? 'N/A' : this.props.selectedPlace.postalCode}</p>
-          <p>City: {!this.props.selectedPlace.city ? 'N/A' : this.props.selectedPlace.city}</p>
+            <div className="info-window">
+          <p><span>Name:</span> {this.props.selectedPlace.name}</p>
+          <p><span>Type:</span> {!this.props.selectedPlace.type ? 'N/A' : this.props.selectedPlace.type}</p>
+          <p><span>Address:</span> {!this.props.selectedPlace.address ? 'N/A' : this.props.selectedPlace.address}</p>
+          <p><span>Postal code:</span> {!this.props.selectedPlace.postalCode ? 'N/A' : this.props.selectedPlace.postalCode}</p>
+          <p><span>City:</span> {!this.props.selectedPlace.city ? 'N/A' : this.props.selectedPlace.city}</p>
+          </div>
+          <div className="source">
           <p>Data provided by the Foursquare API</p>
-            </div>
+          </div>
         </InfoWindow>
       </Map>
-      </div>
     )
   }
 }

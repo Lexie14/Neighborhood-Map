@@ -5,15 +5,15 @@ class Button extends Component {
   render() {
 
     return (
-      <div className="navigation">
     <button 
-    type="button" 
-    onClick={this.props.toggleList}
+    type="button"
     className="button"
-    ></button>
-    </div>
-  )
-}
+    aria-label="Show the list"
+    onClick={this.props.toggleList}>
+    </button>
+    
+    )
+  }
 }
 
 export default Button;

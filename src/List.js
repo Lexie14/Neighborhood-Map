@@ -11,32 +11,32 @@ class List extends Component {
   } 
 
   render() {
-    const listVisible=this.props.listVisible
+    
     
     return (
-      <div className="list">
-      {listVisible && (
-      <aside className="list">
-       <h2 className="title">Popular Places</h2>
-       <div className="filter">
-       <input
-       value={this.props.query}
-       onChange={(event) => this.updateQuery(event.target.value)} 
-       className="filterInput" placeholder="Filter locations"/>
-       </div>
+      <div>
+       <section className="filter">
+        <input
+        className="filterInput"
+        placeholder="Filter locations"
+        type="text"
+        role="text-box"
+        value={this.props.query}
+        onChange={(event) => this.updateQuery(event.target.value)} 
+        />
+        </section>
+        
         <ul>
-        {this.props.filteredLocations.map((location) =>
-          <li key={location.key}
-          onClick={()=>(this.props.onListViewItemClick(location))}
-          >{location.name}</li>
-          )}
+         {this.props.filteredLocations.map((location) =>
+         <li key={location.key}
+         onClick={()=>(this.props.onListViewItemClick(location))}
+         >{location.name}</li>
+         )}
         </ul>
-      </aside>
-      )}
+
       </div>
+    )
 
-
-    );
   }
 }
 
