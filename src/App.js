@@ -64,8 +64,8 @@ class App extends Component {
     infoPosition: {},
     listVisible: true,
     error: false,
-    animation: 2
-  };
+    activeMarker: {}
+   };
 }
 
 componentDidMount() {
@@ -73,7 +73,7 @@ componentDidMount() {
   const newData = this.state.locations
   newData.map((location) => {
    return(
-    fetch(`https://api.foursquare.com/v2/venues/search?ll=${location.location.lat},${location.location.lng}&client_id=CNHL0RH0I5DUM5B42LTDNVTCE3IPJCOK5G3ZY5C3H2UYEW5D&client_secret=01FTFRQ0BKGCCSJ4ROA3CVHNCS2EHD1XH4J00NPRGKECXHPQ&v=20180723&m=foursquare`)
+    fetch(`https://api.foursquare.com/v2/venues/search?ll=${location.location.lat},${location.location.lng}&client_id=D5SNMMUIS3DTXRQ5FN5G1UBU4XKRSEGVR0KXMS5KRB1YZGSY&client_secret=NAJXBKSQ4VEKRWJPDEGVPW1QMASLTUEGXWYDBOVJG2ODFF5J&v=20180723&m=foursquare`)
     .then(response => response.json())
     .then((data) => {
     location.name = data.response.venues[0].name
@@ -90,25 +90,26 @@ componentDidMount() {
     
 }
 
-
-
-
-onMarkerClick = (props, marker, e) => {
+onMarkerClick = (props, marker) => {
     this.setState({
       selectedPlace: props,
       infoPosition: props.position,
       showingInfoWindow: true,
-     
+      activeMarker: marker
     });
-  }
+     this.state.activeMarker.setAnimation(props.google.maps.Animation.BOUNCE);
+     console.log(marker);
+}
     
-onMapClick = ()=> {
+onMapClick = (props)=> {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
         infoPosition: {},
       });
+      this.state.activeMarker.setAnimation(null);
     }
+    console.log(this.state.activeMarker)
   }
 
     onListViewItemClick =(location) =>{
@@ -119,6 +120,9 @@ onMapClick = ()=> {
     })
     }
 
+infoClose = () => {
+  this.state.activeMarker.setAnimation(null);
+}
   filterLocations = (query, newData) => {
   this.setState({
     query: query,
@@ -184,7 +188,12 @@ const errorFree = !this.state.error;
           onMapClick={this.onMapClick}
           animation={this.state.animation}
           google={window.google}
+          clickedMarker={this.state.clickedMarker}
+          activeMarker={this.state.activeMarker}
+          infoClose={this.infoClose}
            />
+          }
+          }
           }
         </section>
        </main>

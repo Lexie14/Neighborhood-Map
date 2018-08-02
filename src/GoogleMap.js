@@ -26,15 +26,19 @@ class GoogleMap extends Component {
         title={location.key}
         position={location.location}
         name={location.name}
-        type = {location.type}
-        address = {location.address}
-        postalCode = {location.postalCode}
-        city = {location.city}/>
+        type={location.type}
+        address={location.address}
+        postalCode={location.postalCode}
+        city={location.city}
+        animation={0}
+        />
         )}
 
          <InfoWindow
           position={{lat: parseFloat(this.props.infoPosition.lat), lng: parseFloat(this.props.infoPosition.lng)}}
-          visible={this.props.showingInfoWindow}>
+          visible={this.props.showingInfoWindow}
+          onClose={this.props.infoClose}          
+          >
           <div>
             <div className="info-window">
           <p><span>Name:</span> {this.props.selectedPlace.name}</p>
