@@ -30,6 +30,7 @@ outline: none;
    margin: auto;
    height: 20px;
    padding: 10px 0;
+   letter-spacing: 0.5px;
 }
 
 .list {
@@ -55,6 +56,7 @@ ul {
 
 li {
   margin-bottom: 20px;
+  letter-spacing: 0.5px;
 }
 
 .main {
@@ -70,6 +72,7 @@ flex: 1;
 .info-window {
 color: #4d4d4d;
 font-size: 12px;
+letter-spacing: 0.5px;
 }
 
 span {
@@ -92,4 +95,19 @@ color: #4d4d4d;
   text-align: right;
 font-size: 12px;
 margin: 0;
+letter-spacing: 0.5px;
+}
+
+.apiError {
+ padding-top: 50px;
+}
+
+.fail {
+  display: block;
+    margin: 50px auto;
+}
+.errorMsg {
+  color: #4d4d4d;
+  text-align: center;
+  margin-top: 20px;
 }

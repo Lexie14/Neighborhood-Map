@@ -4,6 +4,7 @@ import List from './List.js';
 import Button from './Button.js';
 import './App.css';
 import escapeRegExp from 'escape-string-regexp';
+import Error from './Error.js';
 
 class App extends Component {
   constructor(props) {
@@ -61,11 +62,14 @@ class App extends Component {
         showingInfoWindow: false,
     selectedPlace: {},
     infoPosition: {},
-    listVisible: true
+    listVisible: true,
+    error: false,
+    animation: 2
   };
 }
 
 componentDidMount() {
+  window.gm_authFailure = () => this.setState({ error: true });
   const newData = this.state.locations
   newData.map((location) => {
    return(
@@ -78,16 +82,23 @@ componentDidMount() {
     location.postalCode = data.response.venues[0].location.postalCode
     location.city = data.response.venues[0].location.city
     this.setState({newData})
+  }).catch(error => {
+    this.setState({error: true});
   })
   )
 })
+    
 }
+
+
+
 
 onMarkerClick = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
       infoPosition: props.position,
-      showingInfoWindow: true
+      showingInfoWindow: true,
+     
     });
   }
     
@@ -95,7 +106,7 @@ onMapClick = ()=> {
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
-        infoPosition: {}
+        infoPosition: {},
       });
     }
   }
@@ -134,7 +145,8 @@ onMapClick = ()=> {
     filteredLocations = locations
     }
 
-const listVisible=this.state.listVisible
+const listVisible=this.state.listVisible;
+const errorFree = !this.state.error;
 
    return (
       <div className="app">
@@ -143,6 +155,8 @@ const listVisible=this.state.listVisible
         <div className="title">Popular places in Warsaw</div>
        </header>
 
+       {errorFree ? (
+       <section>
        <main className="main">
 
         {listVisible && (
@@ -168,13 +182,23 @@ const listVisible=this.state.listVisible
           onMarkerClick={this.onMarkerClick}
           info={this.state.info}
           onMapClick={this.onMapClick}
+          animation={this.state.animation}
+          google={window.google}
            />
+          }
         </section>
        </main>
-       
+
        <footer className="footer">
        <p className="sources">The app is built using data provided by the Google Api, Foursquare API and Icons8</p>
        </footer>
+
+       </section>
+       ) : (
+       
+       <Error />
+       )}
+
       </div>
     );
   }

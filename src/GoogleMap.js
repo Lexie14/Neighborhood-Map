@@ -35,6 +35,7 @@ class GoogleMap extends Component {
          <InfoWindow
           position={{lat: parseFloat(this.props.infoPosition.lat), lng: parseFloat(this.props.infoPosition.lng)}}
           visible={this.props.showingInfoWindow}>
+          <div>
             <div className="info-window">
           <p><span>Name:</span> {this.props.selectedPlace.name}</p>
           <p><span>Type:</span> {!this.props.selectedPlace.type ? 'N/A' : this.props.selectedPlace.type}</p>
@@ -44,6 +45,7 @@ class GoogleMap extends Component {
           </div>
           <div className="source">
           <p>Data provided by the Foursquare API</p>
+          </div>
           </div>
         </InfoWindow>
       </Map>
