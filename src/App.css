@@ -42,6 +42,11 @@ outline: none;
 margin: 0 3px;
 } 
 
+.listHeader {
+  display: block;
+  margin-top: 10px;
+  margin-left: 10px;
+}
 .filterInput {
   margin-top: 15px;
 }

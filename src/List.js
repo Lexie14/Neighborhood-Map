@@ -16,11 +16,11 @@ class List extends Component {
     return (
       <div>
        <section className="filter">
+       <label htmlFor="input" className="listHeader">Filter locations</label>
         <input
+        id="input"
         className="filterInput"
-        placeholder="Filter locations"
         type="text"
-        role="text-box"
         value={this.props.query}
         onChange={(event) => this.updateQuery(event.target.value)} 
         />
@@ -31,6 +31,8 @@ class List extends Component {
          <li 
          key={location.key}
          aria-label={location.name}
+         tabIndex="0"
+         role="button"
          onClick={()=>(this.props.onListViewItemClick(location))}
          >
          {location.name}

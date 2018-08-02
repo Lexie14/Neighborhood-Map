@@ -153,10 +153,10 @@ const listVisible=this.state.listVisible;
 const errorFree = !this.state.error;
 
    return (
-      <div className="app">
+      <div className="app" role="Main">
        <header className="navigation">
         <Button toggleList={this.toggleList} />
-        <div className="title">Popular places in Warsaw</div>
+        <div className="title" tabIndex='0' role="Heading">Popular places in Warsaw</div>
        </header>
 
        {errorFree ? (
@@ -164,7 +164,7 @@ const errorFree = !this.state.error;
        <main className="main">
 
         {listVisible && (
-        <aside className="list">
+        <aside className="list" role="List">
            <List 
             locations={this.state.locations}
             filteredLocations={filteredLocations}

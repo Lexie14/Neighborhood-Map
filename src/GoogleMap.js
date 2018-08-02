@@ -40,12 +40,12 @@ class GoogleMap extends Component {
           onClose={this.props.infoClose}          
           >
           <div>
-            <div className="info-window">
-          <p><span>Name:</span> {this.props.selectedPlace.name}</p>
-          <p><span>Type:</span> {!this.props.selectedPlace.type ? 'N/A' : this.props.selectedPlace.type}</p>
-          <p><span>Address:</span> {!this.props.selectedPlace.address ? 'N/A' : this.props.selectedPlace.address}</p>
-          <p><span>Postal code:</span> {!this.props.selectedPlace.postalCode ? 'N/A' : this.props.selectedPlace.postalCode}</p>
-          <p><span>City:</span> {!this.props.selectedPlace.city ? 'N/A' : this.props.selectedPlace.city}</p>
+            <div className="info-window" role="Dialog">
+          <p tabIndex="0"><span>Name:</span> {this.props.selectedPlace.name}</p>
+          <p tabIndex="0"><span>Type:</span> {!this.props.selectedPlace.type ? 'N/A' : this.props.selectedPlace.type}</p>
+          <p tabIndex="0"><span>Address:</span> {!this.props.selectedPlace.address ? 'N/A' : this.props.selectedPlace.address}</p>
+          <p tabIndex="0"><span>Postal code:</span> {!this.props.selectedPlace.postalCode ? 'N/A' : this.props.selectedPlace.postalCode}</p>
+          <p tabIndex="0"><span>City:</span> {!this.props.selectedPlace.city ? 'N/A' : this.props.selectedPlace.city}</p>
           </div>
           <div className="source">
           <p>Data provided by the Foursquare API</p>
