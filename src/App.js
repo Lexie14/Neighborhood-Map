@@ -73,7 +73,7 @@ componentDidMount() {
   const newData = this.state.locations
   newData.map((location) => {
    return(
-    fetch(`https://api.foursquare.com/v2/venues/search?ll=${location.location.lat},${location.location.lng}&client_id=D5SNMMUIS3DTXRQ5FN5G1UBU4XKRSEGVR0KXMS5KRB1YZGSY&client_secret=NAJXBKSQ4VEKRWJPDEGVPW1QMASLTUEGXWYDBOVJG2ODFF5J&v=20180723&m=foursquare`)
+    fetch(`https://api.foursquare.com/v2/venues/search?ll=${location.location.lat},${location.location.lng}&client_id=UEPCUHISFX3GC3DP50I5EDZDVF3ZRDPFFSWPZWAEBAMA4X4H&client_secret=0ANKF4KWDROOOJRDOFYNDLCPO3ANSO3CEMR0ANVDADGHWWCY&v=20180723&m=foursquare`)
     .then(response => response.json())
     .then((data) => {
     location.name = data.response.venues[0].name
@@ -87,42 +87,83 @@ componentDidMount() {
   })
   )
 })
-    
+}
+
+  markersArray = [];
+  markerPush = marker => {
+    if (marker) {
+      this.markersArray.push(marker);
+    }
+  };
+
+clearAnimation = () => {
+  this.markersArray.map(el => {
+      el.marker.setAnimation(null);
+    })  
 }
 
 onMarkerClick = (props, marker) => {
-    this.setState({
+  this.clearAnimation();
+    this.setState ({
       selectedPlace: props,
       infoPosition: props.position,
       showingInfoWindow: true,
       activeMarker: marker
     });
-     this.state.activeMarker.setAnimation(props.google.maps.Animation.BOUNCE);
-     console.log(marker);
+     this.state.activeMarker.setAnimation(1);
+     console.log(this.state.activeMarker);
 }
     
 onMapClick = (props)=> {
+  this.clearAnimation();
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
-        infoPosition: {},
+        infoPosition: {}
       });
-      this.state.activeMarker.setAnimation(null);
     }
-    console.log(this.state.activeMarker)
   }
 
-    onListViewItemClick =(location) =>{
+// newArray = this.markersArray.filter( 
+//   el => el.marker.title === location.key ); 
+// newArray.map(el => { 
+//   el.marker.animation = 1; 
+//   return newArray; 
+// })
+
+
+
+
+onListViewItemClick =(location, props, markersArray) => {
+  this.clearAnimation();
+let newMarker
+
+this.markersArray.map(el => {
+  if (el.marker.title === location.key) {
+    newMarker = el.marker
+  }
+})
+            
     this.setState({
       infoPosition: location.location,
       showingInfoWindow: true,
-      selectedPlace: location
-    })
-    }
+      selectedPlace: location,
+      activeMarker: this.markersArray[0].marker
+    });
+    newMarker.setAnimation(1);
+    // console.log(newArray);
+    console.log(location.name)
+    console.log(this.markersArray)
+    console.log(newMarker)
+}
+
+
+
 
 infoClose = () => {
-  this.state.activeMarker.setAnimation(null);
+  this.clearAnimation();
 }
+
   filterLocations = (query, newData) => {
   this.setState({
     query: query,
@@ -191,7 +232,9 @@ const errorFree = !this.state.error;
           clickedMarker={this.state.clickedMarker}
           activeMarker={this.state.activeMarker}
           infoClose={this.infoClose}
+          markerPush={this.markerPush}
            />
+          }
           }
           }
           }

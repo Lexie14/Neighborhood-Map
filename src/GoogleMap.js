@@ -31,10 +31,12 @@ class GoogleMap extends Component {
         postalCode={location.postalCode}
         city={location.city}
         animation={0}
+        ref={this.props.markerPush}
         />
         )}
 
          <InfoWindow
+         className="infoWindow"
           position={{lat: parseFloat(this.props.infoPosition.lat), lng: parseFloat(this.props.infoPosition.lng)}}
           visible={this.props.showingInfoWindow}
           onClose={this.props.infoClose}          

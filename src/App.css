@@ -80,6 +80,11 @@ font-size: 12px;
 letter-spacing: 0.5px;
 }
 
+.infoWindow {
+  display: relative;
+  margin-bottom: 300px;
+}
+
 span {
   font-weight: bold;
 }
@@ -116,3 +121,7 @@ letter-spacing: 0.5px;
   text-align: center;
   margin-top: 20px;
 }
+
+/*.infoWindow {
+  display: relative;
+}*/
