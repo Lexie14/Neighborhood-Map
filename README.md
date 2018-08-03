@@ -7,7 +7,7 @@ This is a single page application featuring a map of the popular places in Warsa
 2. Fetching data from the Foursquare API which is used to display information in the infoWindow on a marker's click.  
 3. List of locations which displayed in the sidebar provides filter option that uses an input field to filter both the list view and the map markers displayed by default on load. The list view and the markers update accordingly in real time.  
 4. Selecting a location via list item in the sidebar or map marker causes the map marker to bounce indicating that the location has been selected and associated info window is opened above the map marker with additional information.  
-5. All data APIs used in the project should asynchronously and errors be handled properly.  
+5. All data APIs used in the project are handled asynchronously as well as errors are handled properly.  
 
 ### To get started:
 * clone or download the project
