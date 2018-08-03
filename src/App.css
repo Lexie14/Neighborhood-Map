@@ -1,5 +1,5 @@
 html {
-   color: #ccc;
+  color: #ccc;
 }
 
 .navigation {
@@ -9,28 +9,28 @@ html {
 
 .button {
   background-image: url('./menu.png');
-  background-color: transparent; 
+  background-color: transparent;
   color: white;
   padding: 8px 0;
-border: none;
-width: 24px;
-height: 24px;
-margin: auto 5px;
-cursor: pointer;
-outline: none;
-} 
+  border: none;
+  width: 24px;
+  height: 24px;
+  margin: auto 5px;
+  cursor: pointer;
+  outline: none;
+}
 
 .title {
-   font-size: 16px;
- font-weight: lighter;
- display: inline-block;
+  font-size: 16px;
+  font-weight: lighter;
+  display: inline-block;
   position: relative;
-   left: 50%;
-   transform: translateX(-50%);
-   margin: auto;
-   height: 20px;
-   padding: 10px 0;
-   letter-spacing: 0.5px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: auto;
+  height: 20px;
+  padding: 10px 0;
+  letter-spacing: 0.5px;
 }
 
 .list {
@@ -39,45 +39,47 @@ outline: none;
 }
 
 .filter {
-margin: 0 3px;
-} 
+  margin: 0 3px;
+}
 
 .listHeader {
   display: block;
   margin-top: 10px;
   margin-left: 10px;
 }
+
 .filterInput {
   margin-top: 15px;
 }
 
 ul {
   list-style-type: none;
-    margin: 0;
-    padding-top: 10px;
-    padding-left: 15px;
-    font-size: 12px;
+  margin: 0;
+  padding-top: 10px;
+  padding-left: 15px;
+  font-size: 12px;
 }
 
 li {
   margin-bottom: 20px;
   letter-spacing: 0.5px;
+  outline: none;
 }
 
 .main {
- display: flex;
+  display: flex;
 }
 
 .map {
-flex: 1;
- height: 100vh;
- position: relative;
+  flex: 1;
+  height: 100vh;
+  position: relative;
 }
 
 .info-window {
-color: #4d4d4d;
-font-size: 12px;
-letter-spacing: 0.5px;
+  color: #4d4d4d;
+  font-size: 12px;
+  letter-spacing: 0.5px;
 }
 
 .infoWindow {
@@ -90,9 +92,9 @@ span {
 }
 
 .source {
-float: right;
-font-size: 10px;
-color: #4d4d4d;
+  float: right;
+  font-size: 10px;
+  color: #4d4d4d;
 }
 
 .footer {
@@ -103,25 +105,22 @@ color: #4d4d4d;
 
 .sources {
   text-align: right;
-font-size: 12px;
-margin: 0;
-letter-spacing: 0.5px;
+  font-size: 12px;
+  margin: 0;
+  letter-spacing: 0.5px;
 }
 
 .apiError {
- padding-top: 50px;
+  padding-top: 50px;
 }
 
 .fail {
   display: block;
-    margin: 50px auto;
+  margin: 50px auto;
 }
+
 .errorMsg {
   color: #4d4d4d;
   text-align: center;
   margin-top: 20px;
 }
-
-/*.infoWindow {
-  display: relative;
-}*/

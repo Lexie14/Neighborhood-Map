@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Button extends Component {
-
   render() {
-
     return (
-    <button 
-    type="button"
-    className="button"
-    aria-label="Show the list"
-    onClick={this.props.toggleList}>
-    </button>
-    
-    )
+      <button
+        type="button"
+        className="button"
+        aria-label="Show the list"
+        onClick={this.props.toggleList}
+      />
+    );
   }
 }
 
