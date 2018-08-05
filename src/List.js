@@ -14,13 +14,13 @@ class List extends Component {
     return (
       <div>
         <section className="filter">
-          <label htmlFor="input" className="listHeader">
+          <label for="input" className="listHeader">
             Filter locations
           </label>
           <input
+            type="text"
             id="input"
             className="filterInput"
-            type="text"
             value={this.props.query}
             onChange={event => this.updateQuery(event.target.value)}
           />
@@ -32,6 +32,7 @@ class List extends Component {
               key={location.key}
               aria-label={location.name}
               tabIndex="0"
+              role="button"
               onClick={() => this.props.onListItemClick(location)}
             >
               {location.name}

@@ -79,9 +79,6 @@ class App extends Component {
 
   // Fetch data from the Foursquare API
   componentDidMount() {
-
-  
-
     const newData = this.state.locations;
     newData.map(location => {
       return fetch(
@@ -107,7 +104,7 @@ class App extends Component {
 
     window.gm_authFailure = () => this.setState({ error: true });
     if (window.google === undefined) {
-    this.setState({ error: true });
+      this.setState({ error: true });
     }
   }
 
