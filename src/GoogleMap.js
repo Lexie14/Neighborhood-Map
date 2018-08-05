@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react";
+import { Map, Marker, InfoWindow } from "google-maps-react";
 import "./App.css";
 
 class GoogleMap extends Component {

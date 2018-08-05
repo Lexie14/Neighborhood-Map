@@ -14,7 +14,7 @@ class List extends Component {
     return (
       <div>
         <section className="filter">
-          <label for="input" className="listHeader">
+          <label htmlFor="input" className="listHeader">
             Filter locations
           </label>
           <input
