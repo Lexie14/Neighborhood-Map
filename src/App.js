@@ -79,7 +79,9 @@ class App extends Component {
 
   // Fetch data from the Foursquare API
   componentDidMount() {
-    window.gm_authFailure = () => this.setState({ error: true });
+
+  
+
     const newData = this.state.locations;
     newData.map(location => {
       return fetch(
@@ -102,6 +104,11 @@ class App extends Component {
           this.setState({ error: true });
         });
     });
+
+    window.gm_authFailure = () => this.setState({ error: true });
+    if (window.google === undefined) {
+    this.setState({ error: true });
+    }
   }
 
   // Create array of markers to be able to loop
@@ -236,6 +243,7 @@ class App extends Component {
 
               <section className="map" role="application">
                 <GoogleMap
+                  google={window.google}
                   toggleList={this.toggleList}
                   locations={filteredLocations}
                   showingInfoWindow={this.state.showingInfoWindow}
@@ -246,6 +254,7 @@ class App extends Component {
                   activeMarker={this.state.activeMarker}
                   infoClose={this.infoClose}
                   markerPush={this.markerPush}
+                  error={this.state.error}
                 />
               </section>
             </main>

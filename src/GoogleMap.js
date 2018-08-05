@@ -7,7 +7,7 @@ class GoogleMap extends Component {
     return (
       <Map
         google={this.props.google}
-        zoom={11}
+        zoom={11  }
         initialCenter={{
           lat: 52.2413928,
           lng: 20.9876703
@@ -81,6 +81,4 @@ class GoogleMap extends Component {
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: "AIzaSyBvmFArLCAwk_50AZuXKl_EmUd9t2_WH5c"
-})(GoogleMap);
+export default GoogleMap;
