@@ -16,3 +16,5 @@ This is a single page application featuring a map of the popular places in Warsa
 
 ### Code Dependencies
 The project was built with the [google-maps-react] using data from the [Foursquare API] and [Google Maps API]. Icons are taken from the [Icon8].
+
+![Screenshot](neighborhood.jpg)
